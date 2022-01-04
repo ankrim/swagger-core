@@ -8,9 +8,10 @@ public class SwaggerConfigFileTest extends ASwaggerMavenIntegrationTest {
     public void testResolveFromConfigIncludingOpenApi() throws Exception {
         File pom = getTestFile("src/test/resources/pom.resolveToFileFromConfigAndOpenApi.xml");
 
-        SwaggerMojo mojo = runTest(pom, openAPI -> {
-            assertEquals(1, openAPI.getServers().get(0).getVariables().size());
-            assertNotNull(openAPI.getInfo());
+        SwaggerMojo mojo = runTest(pom, openAPIs -> {
+            assertEquals(1, openAPIs.size());
+            assertEquals(1, openAPIs.get(0).getServers().get(0).getVariables().size());
+            assertNotNull(openAPIs.get(0).getInfo());
         });
         assertTrue(mojo.getInternalConfiguration().isPrettyPrint());
         assertEquals(1, mojo.getInternalConfiguration().getResourcePackages().size());
